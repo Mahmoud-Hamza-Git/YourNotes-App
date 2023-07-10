@@ -25,11 +25,10 @@ const updateUser = catchAsync(async (req, res, next) => {
 });
 
 const deleteAllUsers = catchAsync(async (req, res, next) => {
-  console.log(req.user);
   if (req.user.role !== 'admin') {
     return next(new AppError('Not Authorized, Admin access needed ✋'));
   }
-  const ack = await User.deleteMany();
+  const ack = await User.deleteMany({ role: 'user' });
   res.status(200).json({ status: 'success', data: ack });
 });
 

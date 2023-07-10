@@ -4,10 +4,10 @@ const AppError = require('../middlewares/errorHandling');
 const { v4: uuid4 } = require('uuid');
 
 const createNote = catchAsync(async (req, res, next) => {
-  const userId = req.user._id;
-  const { text } = req.body;
+  // const userId = req.user._id;
+  const { content, title, userId } = req.body;
 
-  const createdNote = await Note.create({ _id: uuid4(), text, userId });
+  const createdNote = await Note.create({ _id: uuid4(), title, content, userId });
 
   res.status(200).json({ status: 'success', data: createdNote });
 });
@@ -18,9 +18,9 @@ const createNote = catchAsync(async (req, res, next) => {
 
 const updateNote = catchAsync(async (req, res, next) => {
   const noteId = req.params.id;
-  const { text } = req.body;
+  const { content, title } = req.body;
 
-  const updatedNote = await Note.findByIdAndUpdate(noteId, { text }, { new: true });
+  const updatedNote = await Note.findByIdAndUpdate(noteId, { content, title }, { new: true });
 
   res.status(200).json({ status: 'success', data: updatedNote });
 });
@@ -30,8 +30,7 @@ const updateNote = catchAsync(async (req, res, next) => {
 //
 
 const getNotes = catchAsync(async (req, res, next) => {
-  const userId = req.user._id;
-  const { filter } = req.query;
+  const { filter, userId } = req.query;
   let activeFilter;
   if (filter === 'active') {
     activeFilter = { active: true };
@@ -80,7 +79,7 @@ const deleteNote = catchAsync(async (req, res, next) => {
 //
 
 const deleteCompleted = catchAsync(async (req, res, next) => {
-  const userId = req.user._id;
+  const userId = req.body.userId;
 
   const ack = await Note.deleteMany({ $and: [{ userId }, { active: false }] });
 

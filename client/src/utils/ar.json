@@ -1,0 +1,27 @@
+{
+  "sign_title": "إنشاء حساب",
+  "sign_email": "الحساب",
+  "sign_pass": "الرقم السري",
+  "sign_confirm": "تأكيد الرقم السري",
+  "sign_primary": "إكمال انشاء الحساب",
+  "sign_tail": "!تمتلك حساب بالفعل",
+  "sign_login": "تسجيل الدخول",
+
+  "complete_title": "إكمال إنشاء حساب",
+  "complete_name": "اسم المستخدم",
+  "complete_phone": "رقم الهاتف",
+  "complete_year": "سنة الميلاد",
+  "complete_primary": "إكمال استخدام الحساب",
+  "complete_secondary": "للخلف",
+
+  "login_title": "تسجيل الدخول",
+  "login_email": "الحساب",
+  "login_pass": "الرقم السري",
+  "login_primary": "تسجيل دخول",
+  "login_tail": "!لا تمتلك حساب",
+  "login_sign": "إنشاء حساب",
+
+  "header_greeting": "مرحباً",
+  "header_primary": "تسجيل الخروج",
+  "header_secondary": "تعديل بيانات الحساب"
+}

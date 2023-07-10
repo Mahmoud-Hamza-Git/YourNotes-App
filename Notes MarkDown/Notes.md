@@ -37,3 +37,10 @@
    ( browser receive cookies, store it and send it automatically with each request)
 4. remember that token in the request header have to be put in authintcation property in the request options
 5. `select:false` is an option in mongoose schema means that the field such as password will not be included in the query results by default(except creating document which is not a query) However, by calling `.select('+password')`, the password field will be included in the query result .
+
+6. the `body` was the problem in aligning center for fixed positioned header --> don't forget to give max and fixed width for body and header
+   ```
+   max-width: 1600px;
+   width: 100%;
+   margin: auto;
+   ```

@@ -5,7 +5,8 @@ const NoteSchema = mongoose.Schema(
   {
     _id: { type: String, default: uuidv4 },
     userId: { type: String, ref: 'User', required: true },
-    text: { type: String, default: '' },
+    title: { type: String, default: '' },
+    content: { type: String, default: '' },
     active: { type: Boolean, default: true },
   },
   { timestamps: true }

@@ -9,10 +9,10 @@ const {
 const protect = require('../middlewares/authMiddleware');
 const router = require('express').Router();
 
-router.route('/').get(protect, getNotes).post(protect, createNote);
-router.patch('/:id', updateNote);
-router.patch('/status/:id', changeStatus);
+router.route('/').get(getNotes).post(createNote);
+router.post('/:id', updateNote);
+router.post('/status/:id', changeStatus);
 router.delete('/delete/:id', deleteNote);
-router.delete('/delete-completed', protect, deleteCompleted);
+router.delete('/delete-completed', deleteCompleted);
 
 module.exports = router;

@@ -1,0 +1,31 @@
+export const lightMode = {
+  gray: '#7C8495',
+  gray_shade: '#697386',
+  pink: '#D375B9',
+  pink_shade: '#be69a7',
+  fill1: '#fff',
+  fill2: '#fff',
+  fill3: '#fff',
+  text_content: '#494C6B',
+  text_light: '#9495A5',
+  text_white: '#9495A5',
+  text_title_gray: '#697386',
+  crossed_text: '#D1D2DA',
+  pinky_white_text: '#D375B9',
+};
+
+export const nightMode = {
+  gray: '#7C8495',
+  gray_shade: '#697386',
+  pink: '#D375B9',
+  pink_shade: '#be69a7',
+  fill1: '#241229',
+  fill2: '#25273D',
+  fill3: '#404363',
+  text_content: '#C8CBE7',
+  text_light: '#5B5E7E',
+  text_white: '#fff',
+  text_title_gray: '#697386',
+  crossed_text: '#4D5067',
+  pinky_white_text: '#fff',
+};

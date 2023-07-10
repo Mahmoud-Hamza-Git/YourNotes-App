@@ -1,0 +1,44 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 62.5%;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (max-width: 500px) {
+  :root {
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 380px) {
+  :root {
+    font-size: 40%;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.ar * {
+  direction: rtl;
+}
+body {
+  line-height: 1.5;
+  font-weight: 400;
+  max-width: 1600px;
+  width: 100%;
+  margin: auto;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}

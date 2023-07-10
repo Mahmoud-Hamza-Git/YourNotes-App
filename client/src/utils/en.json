@@ -1,0 +1,27 @@
+{
+  "sign_title": "Signup",
+  "sign_email": "Emial",
+  "sign_pass": "Password",
+  "sign_confirm": "Confirm Password",
+  "sign_primary": "Complete Signup",
+  "sign_tail": "Alreay have an account!",
+  "sign_login": "login",
+
+  "complete_title": "Complete Singup",
+  "complete_name": "Username",
+  "complete_phone": "Phone",
+  "complete_year": "Birth Year",
+  "complete_primary": "Complete signup",
+  "complete_secondary": "Back",
+
+  "login_title": "Login",
+  "login_email": "Email",
+  "login_pass": "Password",
+  "login_primary": "Login",
+  "login_tail": "Don't have an account!",
+  "login_sign": "Signup",
+
+  "header_greeting": "hi",
+  "header_primary": "Logout",
+  "header_secondary": "Modify User Info"
+}
