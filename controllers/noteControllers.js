@@ -1,11 +1,15 @@
 const Note = require('../models/noteModel');
 const catchAsync = require('../utils/catchAsync');
-const AppError = require('../middlewares/errorHandling');
+const { AppError } = require('../middlewares/errorHandling');
 const { v4: uuid4 } = require('uuid');
 
 const createNote = catchAsync(async (req, res, next) => {
-  // const userId = req.user._id;
-  const { content, title, userId } = req.body;
+  const userId = req.user._id;
+  const { content, title } = req.body;
+
+  if (!content) {
+    return next(new AppError('you have to provide Content for the note', 400));
+  }
 
   const createdNote = await Note.create({ _id: uuid4(), title, content, userId });
 
@@ -30,7 +34,8 @@ const updateNote = catchAsync(async (req, res, next) => {
 //
 
 const getNotes = catchAsync(async (req, res, next) => {
-  const { filter, userId } = req.query;
+  const userId = req.user._id;
+  const { filter } = req.query;
   let activeFilter;
   if (filter === 'active') {
     activeFilter = { active: true };
@@ -52,7 +57,7 @@ const changeStatus = catchAsync(async (req, res, next) => {
   const noteId = req.params.id;
   let { active } = req.query;
   if (!active) {
-    return next(new AppError('you need to add the targeted note status in the request', 500));
+    return next(new AppError('you need to add the targeted note status in the request', 400));
   }
 
   active = active === '1' ? true : false;
@@ -71,7 +76,7 @@ const deleteNote = catchAsync(async (req, res, next) => {
 
   const deletedNote = await Note.findByIdAndDelete(noteId);
 
-  res.status(200).json({ status: 'success', data: 'The note is deleted' });
+  res.status(204).json({ status: 'success', data: 'The note is deleted' });
 });
 
 //
