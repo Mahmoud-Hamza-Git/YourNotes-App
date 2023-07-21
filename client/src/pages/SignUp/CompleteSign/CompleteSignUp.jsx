@@ -10,11 +10,13 @@ import StyledLink from '../../../components/StyledLink';
 
 const CompleteSign = () => {
   const navigate = useNavigate();
+
   useEffect(() => {
     if (localStorage.getItem('user')) {
       navigate('/');
     }
   }, []);
+  
   const { t } = useTranslation();
   const location = useLocation();
 

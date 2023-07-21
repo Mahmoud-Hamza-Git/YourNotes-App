@@ -4,17 +4,12 @@ const { AppError } = require('./errorHandling');
 const User = require('../models/userModel');
 
 const protect = catchAsync(async (req, res, next) => {
-  // console.log(req.cookies.jwt, '✅');
-  // if (!req.cookies.jwt) {
-  //   return next(new AppError('Not Authorized, there is no JWT Token', 500));
-  // }
-
-  const token = req.headers.authorization?.split(' ')[1];
-  console.log(token, '✅');
+  // const token = req.headers.authorization?.split(' ')[1];  2 ways to get parameters in header, 1 from headers object and the other using header method provided by express &*()
+  const token = req.header('Authorization')?.split(' ')[1];
   if (!token) {
-    return next(new AppError('Not Authorized, there is no JWT Token', 500));
+    return next(new AppError('Not Authorized, there is no JWT Token', 401));
   }
-  res.set('Authorization', `Bearer ${token}`);
+  console.log('Authentication called✅');
   jwt.verify(token, process.env.JWT_SECRET, async (error, decoded) => {
     if (error) {
       console.log('JWT Error👉', error);

@@ -25,6 +25,7 @@ const LoginForm = () => {
     onSuccess: (data) => {
       if (data.status == 'success') {
         localStorage.setItem('user', JSON.stringify(data?.data));
+        localStorage.setItem('jwt', data.token);
         toast.success('Logged In Successfuly🎉', successOption());
         setTimeout(() => {
           navigate('/');

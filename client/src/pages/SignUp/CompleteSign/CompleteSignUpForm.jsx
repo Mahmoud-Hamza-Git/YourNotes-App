@@ -28,6 +28,7 @@ const SignUpForm = ({ starterdata }) => {
     onSuccess: (data) => {
       if (data.status == 'success') {
         localStorage.setItem('user', JSON.stringify(data.data));
+        localStorage.setItem('jwt', data.data);
         toast.success('Signed Up Successfuly🎉', successOption());
         setTimeout(() => {
           navigate('/');
@@ -41,7 +42,7 @@ const SignUpForm = ({ starterdata }) => {
   //
 
   // Handlers
-  const handleSubmit = (e) => {
+  const handleSignUp = (e) => {
     e.preventDefault();
     signMutation.mutate({
       ...starterdata,
@@ -52,7 +53,7 @@ const SignUpForm = ({ starterdata }) => {
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit}>
+    <FormWrapper onSubmit={handleSignUp}>
       <h1 className='form-title'>{t('complete_title')}</h1>
       <InputContainer>
         <label className='input-title' htmlFor='username1'>

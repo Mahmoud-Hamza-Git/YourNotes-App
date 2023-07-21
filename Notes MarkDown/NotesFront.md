@@ -20,3 +20,44 @@
      </Routes>
    ```
 6. to make a dimension responsive, use % size but be aware of to what level you want the dimension to still response and limit it using min-height & max-height or min-width & max-width
+7. A function that sets Authorization header for all subsequent axios requsts to the server
+   ```
+   const setAuthToken = (token) => {
+      if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      } else {
+      delete axios.defaults.headers.common['Authorization'];
+      }
+   };
+   ```
+8. `onBlur` event is the opposite of `onFocused` event, it is to trigger an "unfocus" action when an input element loses focus.
+9. use functional update in react instead of any other way `setArrayState(prevArray => [newElement, ...prevArray])` like `unshift` or `push`
+10. the nature of update state functions may leads to error such as it can't see the event object inside it because it is not executed instatly so you can capture the `e.currentTarget.value` in a variable outside the state update function, so it is available inside the closure when setNotes is called.
+    ```
+      const handleTyping = (e, id) => {
+         const updatedValue = e.currentTarget.value; // Store the value in a variable
+         setNotes((prev) =>
+            prev.map((note) => (note._id === id ? { ...note, content: updatedValue } : note))
+         );
+      };
+    ```
+11. there is no data attribute in fetch response
+
+```
+   const response = await fetch(`http://localhost:6060/api/notes`, config);
+   return response.json();
+
+   const response = await axios.get('http://localhost:6060/api/notes', config);
+   return response.data;
+```
+
+13. in post request in axios remember to add the body as the second argument or pass it with null if there is no body
+
+    ```
+      const response = await axios.post(`http://localhost:6060/api/notes/status/${id}/?active=${isActive}`, null, config);
+      return response.data;
+
+      const response = await fetch(`http://localhost:6060/api/notes/status/${id}/?active=${isActive}`, config);
+      const data = await response.json();
+      return data;
+    ```

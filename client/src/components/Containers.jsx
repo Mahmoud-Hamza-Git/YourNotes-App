@@ -63,12 +63,16 @@ export const Note = styled(HeadContainer)`
   }
   .entering {
     width: 100%;
+    display: flex;
+    align-items: center;
     font-size: 2rem;
-    height: 3rem;
+    min-height: 3rem;
+    max-height: 10rem;
     padding: 1rem;
     border: none;
     color: ${({ theme }) => theme.text_content};
     background-color: ${({ theme }) => theme.fill2};
+    letter-spacing: 1px;
   }
   .entering:focus {
     outline: none;
@@ -83,11 +87,15 @@ export const Note = styled(HeadContainer)`
     min-height: 2.5rem;
     cursor: pointer;
   }
+  .active {
+    font-size: 2.5rem;
+    color: ${({ theme }) => theme.pink};
+    cursor: pointer;
+  }
   .cross {
-    font-size: 2rem;
     color: ${({ theme }) => theme.text_content};
-    min-width: 2.5rem;
-    min-height: 2.5rem;
+    min-width: 2rem;
+    min-height: 2rem;
     cursor: pointer;
   }
 `;

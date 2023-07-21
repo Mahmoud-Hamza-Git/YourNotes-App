@@ -44,3 +44,11 @@
    width: 100%;
    margin: auto;
    ```
+7. 2 ways to get parameters in header, 1 from headers object and the other using header method provided by express
+
+   ```
+   const token = req.headers.authorization?.split(' ')[1];
+   const token = req.header('Authorization')?.split(' ')[1];
+   ```
+
+8. you can't use asyc await with the .then .catch as with async await you can access the response from the object returned from the function directly
