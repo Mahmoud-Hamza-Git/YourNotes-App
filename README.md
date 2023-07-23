@@ -27,6 +27,16 @@
   - go to the local host link appears in the terminal to view the app
 
 ## Preview
+![image](https://github.com/Mahmoud-Hamza-Git/YourNotes-App/assets/86957735/758c1510-0b02-4333-a4c6-f2dac5f025d8)
+
+<br/>
+
+![image](https://github.com/Mahmoud-Hamza-Git/YourNotes-App/assets/86957735/3ac314c8-fded-4cbd-9aca-d9c2bb019cac)
+
+<br/>
+
+![image](https://github.com/Mahmoud-Hamza-Git/YourNotes-App/assets/86957735/ed17b505-aa6f-4b34-ae29-083cfab9b753)
+
 
 ## You can reach out
 
