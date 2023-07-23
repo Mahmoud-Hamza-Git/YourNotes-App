@@ -71,6 +71,7 @@ export const NoteArea = styled.div`
     font-size: 1.8rem;
     min-height: 15rem;
     flex-grow: 1;
+    line-height: 1.5;
   }
 `;
 

@@ -176,7 +176,7 @@ const Home = () => {
                 ) : (
                   <AiFillCheckCircle className='checked' onClick={toggleActive.bind(null, note._id)} />
                 )}
-                <div type='text' name='entering' className='entering' onClick={() => handleOpenArea(i)}>
+                <div type='text' name='entering' className='entering old' onClick={() => handleOpenArea(i)}>
                   {note.title ? note.title : note.content}
                 </div>
                 <ImCross className='cross' onClick={() => deleteNote(note._id)} />

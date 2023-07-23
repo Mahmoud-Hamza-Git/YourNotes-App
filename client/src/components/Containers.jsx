@@ -75,6 +75,13 @@ export const Note = styled(HeadContainer)`
     text-decoration: ${({ crossed }) => (!crossed ? 'none' : 'line-through')};
     background-color: ${({ theme }) => theme.fill2};
     letter-spacing: 1px;
+    transition: opacity 200ms;
+  }
+  .entering.old {
+    cursor: pointer;
+  }
+  .entering.old:hover {
+    opacity: 0.6;
   }
   .entering:focus {
     outline: none;
