@@ -6,11 +6,12 @@ export const MainContainer = styled.div`
   margin-top: 6.5rem;
   background-color: ${({ theme }) => theme.fill1};
   position: relative;
+  overflow: hidden;
 
   display: flex;
   justify-content: center;
 
-  padding-top: 10%;
+  padding-top: 5%;
 
   .cover {
     position: absolute;
@@ -70,7 +71,8 @@ export const Note = styled(HeadContainer)`
     max-height: 10rem;
     padding: 1rem;
     border: none;
-    color: ${({ theme }) => theme.text_content};
+    color: ${({ theme, crossed }) => (!crossed ? theme.text_content : theme.crossed_text)};
+    text-decoration: ${({ crossed }) => (!crossed ? 'none' : 'line-through')};
     background-color: ${({ theme }) => theme.fill2};
     letter-spacing: 1px;
   }

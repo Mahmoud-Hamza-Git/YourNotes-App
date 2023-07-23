@@ -3,7 +3,7 @@ import axios from 'axios';
 export const createNoteRequest = async (data) => {
   const token = localStorage.getItem('token');
   try {
-    const res = await axios.post('http://localhost:6060/api/notes', data, {
+    const res = await axios.post('https://your-notes-api.onrender.com/api/notes', data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -14,7 +14,7 @@ export const createNoteRequest = async (data) => {
   }
 };
 
-export const getNotesRequest = async () => {
+export const getNotesRequest = async (filter) => {
   const token = localStorage.getItem('token');
   const config = {
     headers: {
@@ -22,7 +22,10 @@ export const getNotesRequest = async () => {
     },
   };
   try {
-    const response = await axios.get('http://localhost:6060/api/notes', config);
+    const response = await axios.get(
+      `https://your-notes-api.onrender.com/api/notes/?filter=${filter}`,
+      config
+    );
     return response.data;
   } catch (error) {
     console.log(error.response.data);
@@ -38,7 +41,7 @@ export const deleteNoteRequest = async (id) => {
     },
   };
   try {
-    const response = await axios.delete(`http://localhost:6060/api/notes/delete/${id}`, config);
+    const response = await axios.delete(`https://your-notes-api.onrender.com/api/notes/delete/${id}`, config);
     return response.data;
   } catch (error) {
     console.log(error.response.data);
@@ -54,7 +57,7 @@ export const updateNoteRequest = async (id, data) => {
     },
   };
   try {
-    const response = await axios.post(`http://localhost:6060/api/notes/${id}`, config, data);
+    const response = await axios.post(`https://your-notes-api.onrender.com/api/notes/${id}`, data, config);
     return response.data;
   } catch (error) {
     console.log(error.response.data);
@@ -71,7 +74,7 @@ export const changeStatusRequest = async (id, isActive) => {
   };
   try {
     const response = await axios.post(
-      `http://localhost:6060/api/notes/status/${id}/?active=${isActive}`,
+      `https://your-notes-api.onrender.com/api/notes/status/${id}/?active=${isActive}`,
       null,
       config
     );
@@ -82,6 +85,24 @@ export const changeStatusRequest = async (id, isActive) => {
   }
 };
 
+export const deleteCompletedRequest = async () => {
+  const token = localStorage.getItem('token');
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await axios.delete(
+      'https://your-notes-api.onrender.com/api/notes/delete-completed',
+      config
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error.response.data);
+    return error.response.data;
+  }
+};
 // export const changeStatusRequest = async (id, isActive) => {
 //   const token = localStorage.getItem('token');
 //   const config = {
@@ -92,7 +113,7 @@ export const changeStatusRequest = async (id, isActive) => {
 //     },
 //   };
 //   try {
-// const response = await fetch(`http://localhost:6060/api/notes/status/${id}/?active=${isActive}`, config);
+// const response = await fetch(`https://your-notes-api.onrender.com/api/notes/status/${id}/?active=${isActive}`, config);
 // const data = await response.json();
 // return data;
 //   } catch (error) {

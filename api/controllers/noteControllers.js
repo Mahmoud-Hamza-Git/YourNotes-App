@@ -84,10 +84,11 @@ const deleteNote = catchAsync(async (req, res, next) => {
 //
 
 const deleteCompleted = catchAsync(async (req, res, next) => {
-  const userId = req.body.userId;
-
+  const userId = req.user._id;
+  console.log(userId);
   const ack = await Note.deleteMany({ $and: [{ userId }, { active: false }] });
 
+  console.log('first', ack);
   res.status(200).json({ status: 'success', data: ack });
 });
 

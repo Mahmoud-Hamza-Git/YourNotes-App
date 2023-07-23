@@ -29,7 +29,7 @@ const SignUpForm = ({ starterdata }) => {
       if (data.status == 'success') {
         localStorage.setItem('user', JSON.stringify(data.data));
         localStorage.setItem('jwt', data.data);
-        toast.success('Signed Up Successfuly🎉', successOption());
+        toast.success(t('toast_signupSuccess'), successOption());
         setTimeout(() => {
           navigate('/');
         }, 1500);

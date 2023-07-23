@@ -61,3 +61,5 @@
       const data = await response.json();
       return data;
     ```
+
+14. there is no escape from using 2-way binding if you want to show someting in the input section

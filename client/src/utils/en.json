@@ -23,5 +23,12 @@
 
   "header_greeting": "hi",
   "header_primary": "Logout",
-  "header_secondary": "Modify User Info"
+  "header_secondary": "Modify User Info",
+
+  "info_title": "Modify User Information",
+  "info_primary": "Save Changes",
+
+  "toast_updatedSuccess": "User Info Updated Succesfully🎉",
+  "toast_loggSuccess": "Logged In Successfuly🎉",
+  "toast_signupSuccess": "Signed Up Successfuly🎉"
 }

@@ -1,4 +1,4 @@
-import { Note } from '../../components/Containers';
+import { HeadContainer, Note } from '../../components/Containers';
 
 import { styled } from 'styled-components';
 import { Button } from '../../components/PrimaryButton';
@@ -43,7 +43,7 @@ export const NoteArea = styled.div`
     font-weight: 700;
     padding: 0.1rem 0.6rem;
     border-radius: 1rem;
-    color: ${({ theme }) => theme.fill2};
+    color: ${({ theme }) => theme.text_content};
     background-color: ${({ theme }) => theme.pink};
   }
 
@@ -80,7 +80,55 @@ export const NoteAreaOverlay = styled.div`
   top: 0;
   left: 0;
   z-index: 1;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background-color: #0000006c;
+`;
+
+export const TailContainer = styled(HeadContainer)`
+  border-radius: 1rem;
+  justify-content: space-between;
+  .clear-btn {
+    background-color: transparent;
+    border: none;
+    color: ${({ theme }) => theme.text_light};
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+  .statistics {
+    color: ${({ theme }) => theme.text_light};
+    font-size: 1.3rem;
+  }
+`;
+
+export const Filter = styled(HeadContainer)`
+  display: none;
+  border-radius: 1rem;
+  gap: 2rem;
+  justify-content: center;
+  button:nth-child(${({ index }) => index}) {
+    color: ${({ theme }) => theme.pink_shade};
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    color: ${({ theme }) => theme.text_light};
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+  @media (max-width: 700px) {
+    display: flex;
+  }
+`;
+
+export const FilterTail = styled(Filter)`
+  width: auto;
+  display: flex;
+  box-shadow: none;
+  button:nth-child(${({ index }) => index}) {
+    color: ${({ theme }) => theme.pink_shade};
+  }
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;

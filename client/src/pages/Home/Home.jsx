@@ -4,42 +4,63 @@ import { BsCircle } from 'react-icons/bs';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { ImCross } from 'react-icons/im';
 import { ContentContaienr, NotesContainer, Note, MainContainer } from '../../components/Containers';
-import { HomeHeadContainer, NoteArea, NoteAreaOverlay, OpenBtn } from './HomeStyle';
-import PrimaryButton from '../../components/PrimaryButton';
+import { HomeHeadContainer, NoteAreaOverlay, OpenBtn, TailContainer, Filter, FilterTail } from './HomeStyle';
+import HomeNoteArea from './HomeNoteArea';
 import {
   getNotesRequest,
   createNoteRequest,
   deleteNoteRequest,
   changeStatusRequest,
   updateNoteRequest,
+  deleteCompletedRequest,
 } from '../../apis/notesApis';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { errorOption } from '../../utils/toastOptions';
+import { styled } from 'styled-components';
+const StyeledToast = styled(ToastContainer)`
+  font-size: 1.5rem;
+  position: absolute;
+  bottom: 0;
+`;
 
 const Home = () => {
   // !! Hooks !!
+  const createAreaRef = useRef();
+
   const navigate = useNavigate();
   const [notes, setNotes] = useState([]);
   const [areaOpen, setAreaOpen] = useState();
+  const [isEdit, setIsEdit] = useState(0);
+  const [filterIndex, setFilterIndex] = useState(1);
+  const [notesCount, setNotesCount] = useState(0);
   const [selectedNote, setSelectedNote] = useState({ content: '', title: '' });
-
-  const createAreaRef = useRef();
   useEffect(() => {
     if (!localStorage.getItem('user')) {
       navigate('/login');
     }
   }, []);
 
+  // !! Functions !!
+  async function get() {
+    let res;
+    if (filterIndex === 2) {
+      res = await getNotesRequest('active');
+    } else if (filterIndex === 3) {
+      res = await getNotesRequest('completed');
+    } else {
+      res = await getNotesRequest();
+    }
+    setNotes(res.data);
+    setNotesCount(res.data.length);
+  }
+
   // !! Queries !!
   // GET Notes
   useEffect(() => {
-    async function get() {
-      const res = await getNotesRequest();
-      setNotes(res.data);
-    }
     get();
-  }, []);
+  }, [filterIndex]);
 
   // !! HANDLERS !!
 
@@ -52,11 +73,31 @@ const Home = () => {
   const addNoteBlur = async () => {
     if (createAreaRef.current.value) {
       const res = await createNoteRequest({ content: createAreaRef.current.value }); // save the note to the server
-      createAreaRef.current.value = ''; // clear the entering area
-      // update the state
+      if (res.status == 'success') {
+        createAreaRef.current.value = ''; // clear the entering area
+        // update the state
+        setNotes((prev) => {
+          return [res.data, ...prev];
+        });
+      } else {
+        toast.error(res.message, errorOption());
+      }
+    }
+  };
+
+  const addNote = async (data) => {
+    const res = await createNoteRequest({
+      content: data.content,
+      title: data.title,
+    });
+    if (res.status == 'success') {
       setNotes((prev) => {
         return [res.data, ...prev];
       });
+      setSelectedNote({ content: '', title: '' });
+      setAreaOpen(0); // close area
+    } else {
+      toast.error(res.message, errorOption());
     }
   };
 
@@ -80,25 +121,30 @@ const Home = () => {
     });
   };
 
-  const updateNote = (e, id) => {
-    if (e.currentTarget.value) {
-      updateNoteRequest(id, { content: e.currentTarget.value });
+  const deleteCompleted = async () => {
+    const res = await deleteCompletedRequest();
+    console.log(res.data, 'done❌');
+    get();
+  };
+
+  const updateNote = async (id, data) => {
+    if (data.content) {
+      const res = await updateNoteRequest(id, { content: data.content, title: data.title });
+      setNotes((prev) => prev.map((note) => (note._id === id ? res.data : note)));
+      setAreaOpen(0); // close area
     }
   };
 
-  const handleTyping = (e, id) => {
-    const newValue = e.currentTarget.value;
-    setNotes((prev) => prev.map((note) => (note._id === id ? { ...note, content: newValue } : note)));
-  };
-
-  const handleCloseArea = async () => {
+  const handleCloseArea = () => {
     setAreaOpen(0); // close area
   };
 
   const handleOpenArea = (index) => {
     if (index != undefined) {
-      setSelectedNote(notes[index]);
+      setSelectedNote((prev) => notes[index]);
+      setIsEdit(1);
     } else {
+      setIsEdit(0);
       setSelectedNote({ content: '', title: '' });
     }
     setAreaOpen(1); // open area
@@ -123,7 +169,7 @@ const Home = () => {
         <NotesContainer>
           {notes.length != 0 &&
             notes.map((note, i) => (
-              <Note key={i}>
+              <Note key={i} crossed={!note.active}>
                 {note.active ? (
                   <BsCircle className='active' onClick={toggleActive.bind(null, note._id)} />
                 ) : (
@@ -135,26 +181,35 @@ const Home = () => {
                 <ImCross className='cross' onClick={() => deleteNote(note._id)} />
               </Note>
             ))}
+
+          <TailContainer>
+            <small className='statistics'>{notesCount} items left</small>
+            <FilterTail index={filterIndex}>
+              <button onClick={setFilterIndex.bind(null, 1)}>All</button>
+              <button onClick={setFilterIndex.bind(null, 2)}>Active</button>
+              <button onClick={setFilterIndex.bind(null, 3)}>Completed</button>
+            </FilterTail>
+            <button className='clear-btn' onClick={deleteCompleted}>
+              Clear Completed
+            </button>
+          </TailContainer>
         </NotesContainer>
+        <Filter index={filterIndex}>
+          <button onClick={setFilterIndex.bind(null, 1)}>All</button>
+          <button onClick={setFilterIndex.bind(null, 2)}>Active</button>
+          <button onClick={setFilterIndex.bind(null, 3)}>Completed</button>
+        </Filter>
       </ContentContaienr>
-      <NoteArea open={areaOpen}>
-        <small className='close-icon' onClick={handleCloseArea}>
-          X
-        </small>
-        <textarea
-          type='text'
-          name='title'
-          className='title'
-          placeholder='Enter Title....'
-          defaultValue={selectedNote.title}
-          onChange={handleTyping}
-          rows='1'
-        />
-        <textarea className='content' defaultValue={selectedNote.content} />
-        <PrimaryButton onClick={handleCloseArea}>Add Note</PrimaryButton>
-      </NoteArea>
+      <HomeNoteArea
+        note={selectedNote}
+        onClose={handleCloseArea}
+        open={areaOpen}
+        onAdd={addNote}
+        isEdit={isEdit}
+        onEdit={updateNote}
+      />
       <NoteAreaOverlay onClick={handleCloseArea} open={areaOpen} />
-      <ToastContainer />
+      <StyeledToast />
     </MainContainer>
   );
 };
