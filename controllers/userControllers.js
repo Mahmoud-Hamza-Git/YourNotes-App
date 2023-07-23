@@ -9,7 +9,7 @@ const updateUser = catchAsync(async (req, res, next) => {
   if (email) {
     const foundUser = await User.findOne({ email });
     if (foundUser) {
-      return next(new AppError('This Email is already Exists 🤷‍♂️', 500));
+      return next(new AppError('This Email is already Exists 🤷‍♂️', 400));
     }
   }
 
