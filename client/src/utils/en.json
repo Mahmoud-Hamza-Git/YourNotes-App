@@ -30,5 +30,18 @@
 
   "toast_updatedSuccess": "User Info Updated Succesfully🎉",
   "toast_loggSuccess": "Logged In Successfuly🎉",
-  "toast_signupSuccess": "Signed Up Successfuly🎉"
+  "toast_signupSuccess": "Signed Up Successfuly🎉",
+  "toast_infoError": "you have to edit your info first✋",
+
+  "home_primaryOpen": "open",
+  "home_primaryAdd": "Add Note",
+  "home_primaryEdit": "Edit Note",
+
+  "home_inputPlaceholder": "Write a note...",
+  "home_titlePlaceholder": "Write a title...",
+  "home_all": "All",
+  "home_active": "Active",
+  "home_completed": "Completed",
+  "home_notesLeft": "items left",
+  "home_deleteCompleted": "Clear Completed"
 }

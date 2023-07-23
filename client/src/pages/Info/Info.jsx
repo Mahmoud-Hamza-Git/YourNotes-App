@@ -45,7 +45,7 @@ const Info = () => {
         toast.error(res.message, errorOption());
       }
     } else {
-      toast.error('you have to edit the your info first', errorOption());
+      toast.error(t('toast_infoError'), errorOption());
     }
   };
 

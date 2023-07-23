@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NoteArea } from './HomeStyle';
 import PrimaryButton from '../../components/PrimaryButton';
+import { useTranslation } from 'react-i18next';
 
 const HomeNoteArea = ({ note, onClose, onAdd, onEdit, open, isEdit }) => {
   const titleRef = useRef();
   const contentRef = useRef();
   const [title, setTittle] = useState('');
   const [content, setContent] = useState('');
-
+  const { t } = useTranslation();
   useEffect(() => {
     setTittle(note.title);
     setContent(note.content);
@@ -40,13 +41,15 @@ const HomeNoteArea = ({ note, onClose, onAdd, onEdit, open, isEdit }) => {
         type='text'
         name='title'
         className='title'
-        placeholder='Enter Title....'
+        placeholder={t('home_titlePlaceholder')}
         value={title}
         onChange={handleTypingTitle}
         ref={titleRef}
       />
       <textarea className='content' value={content} onChange={handleTypingContent} ref={contentRef} />
-      <PrimaryButton onClick={handleSubmit}>{isEdit ? 'Edit Note' : 'Add Note'}</PrimaryButton>
+      <PrimaryButton onClick={handleSubmit}>
+        {isEdit ? t('home_primaryEdit') : t('home_primaryAdd')}
+      </PrimaryButton>
     </NoteArea>
   );
 };

@@ -33,6 +33,7 @@ const HeaderLogo = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-direction: ${({ lang }) => (lang == 'ar' ? 'row-reverse' : 'row')};
   .logo-title {
     font-size: 2.5rem;
     font-weight: 500;
@@ -136,7 +137,7 @@ const Header = () => {
     <>
       <Container>
         <StyledLink to='/'>
-          <HeaderLogo>
+          <HeaderLogo lang={i18n.language}>
             <img src='images/logo_pink.png' alt='logo icon' className='logo' />
             <h3 className='logo-title'>Your Notes</h3>
           </HeaderLogo>

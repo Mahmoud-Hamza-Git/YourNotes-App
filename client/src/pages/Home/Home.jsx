@@ -19,6 +19,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { errorOption } from '../../utils/toastOptions';
 import { styled } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 const StyeledToast = styled(ToastContainer)`
   font-size: 1.5rem;
   position: absolute;
@@ -28,7 +29,7 @@ const StyeledToast = styled(ToastContainer)`
 const Home = () => {
   // !! Hooks !!
   const createAreaRef = useRef();
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [notes, setNotes] = useState([]);
   const [areaOpen, setAreaOpen] = useState();
@@ -159,12 +160,12 @@ const Home = () => {
             type='text'
             name='entering'
             className='entering'
-            placeholder='Write a note...'
+            placeholder={t('home_inputPlaceholder')}
             onBlur={addNoteBlur}
             onKeyDown={addNoteKeyDown}
             ref={createAreaRef}
           />
-          <OpenBtn onClick={() => handleOpenArea()}>open</OpenBtn>
+          <OpenBtn onClick={() => handleOpenArea()}>{t('home_primaryOpen')}</OpenBtn>
         </HomeHeadContainer>
         <NotesContainer>
           {notes.length != 0 &&
@@ -183,21 +184,23 @@ const Home = () => {
             ))}
 
           <TailContainer>
-            <small className='statistics'>{notesCount} items left</small>
+            <small className='statistics'>
+              {notesCount} {t('home_notesLeft')}
+            </small>
             <FilterTail index={filterIndex}>
-              <button onClick={setFilterIndex.bind(null, 1)}>All</button>
-              <button onClick={setFilterIndex.bind(null, 2)}>Active</button>
-              <button onClick={setFilterIndex.bind(null, 3)}>Completed</button>
+              <button onClick={setFilterIndex.bind(null, 1)}>{t('home_all')}</button>
+              <button onClick={setFilterIndex.bind(null, 2)}>{t('home_active')}</button>
+              <button onClick={setFilterIndex.bind(null, 3)}>{t('home_completed')}</button>
             </FilterTail>
             <button className='clear-btn' onClick={deleteCompleted}>
-              Clear Completed
+              {t('home_deleteCompleted')}
             </button>
           </TailContainer>
         </NotesContainer>
         <Filter index={filterIndex}>
-          <button onClick={setFilterIndex.bind(null, 1)}>All</button>
-          <button onClick={setFilterIndex.bind(null, 2)}>Active</button>
-          <button onClick={setFilterIndex.bind(null, 3)}>Completed</button>
+          <button onClick={setFilterIndex.bind(null, 1)}>{t('home_all')}</button>
+          <button onClick={setFilterIndex.bind(null, 2)}>{t('home_active')}</button>
+          <button onClick={setFilterIndex.bind(null, 3)}>{t('home_completed')}</button>
         </Filter>
       </ContentContaienr>
       <HomeNoteArea

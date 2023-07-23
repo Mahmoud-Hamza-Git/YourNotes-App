@@ -30,5 +30,17 @@
 
   "toast_updatedSuccess": "🎉تم تعديل بيانات المستخدم بنجاح",
   "toast_loggSuccess": "تم تسجيل الدخول بنجاح🎉",
-  "toast_signupSuccess": "تم تسجيل الحساب بنجاج🎉"
+  "toast_signupSuccess": "تم تسجيل الحساب بنجاج🎉",
+  "toast_infoError": "يجب تعديل معلوماتك اولا✋",
+
+  "home_primaryOpen": "فتح",
+  "home_primaryAdd": "اضافة ملاحظه",
+  "home_primaryEdit": "تعديل الملاحظه",
+  "home_inputPlaceholder": "انشاء ملاحظه جديده...",
+  "home_titlePlaceholder": "اكتب عنوان...",
+  "home_all": "الكل",
+  "home_active": "متبقي",
+  "home_completed": "منتهي",
+  "home_notesLeft": "ملاحظات متبقيه",
+  "home_deleteCompleted": "مسح ما تم انهاؤه"
 }
